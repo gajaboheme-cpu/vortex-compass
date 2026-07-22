@@ -108,7 +108,7 @@ export default function Home() {
     <main>
       <nav className="nav" aria-label="Main navigation">
         <a className="brand-link" href="https://gajaboheme.com" aria-label="Visit the Gaja Bohème website">
-          <Image src="/brand/gaja-logo-forest.png" alt="Gaja Bohème" width={104} height={104} priority />
+          <Image src="/brand/gaja-logo-forest.png" alt="Gaja Bohème" width={104} height={104} style={{ width: "auto", height: "100%" }} priority />
         </a>
         <span className="nav-mark" aria-hidden="true">✦</span>
       </nav>
@@ -125,14 +125,15 @@ export default function Home() {
       )}
 
       {step === "quiz" && (
-        <section className="quiz screen">
+        <section className={`quiz screen ${questions[questionIndex].options.some((item) => item.image) ? "visual-question" : ""}`}>
           <div className="progress-meta"><span>QUESTION {questionIndex + 1} OF {questions.length}</span><span>{Math.round(((questionIndex + 1) / questions.length) * 100)}%</span></div>
           <div className="progress"><span style={{ width: `${((questionIndex + 1) / questions.length) * 100}%` }} /></div>
           <p className="eyebrow">LISTEN FOR WHAT FEELS TRUE</p>
           <h2>{questions[questionIndex].prompt}</h2>
-          <div className="answers">
+          <div className={`answers ${questions[questionIndex].options.some((item) => item.image) ? "visual-answers" : ""}`}>
             {questions[questionIndex].options.map((item, index) => (
-              <button key={item.direction} className="answer" onClick={() => answerQuestion(item.direction)}>
+              <button key={item.direction} className={`answer ${item.image ? "image-answer" : ""}`} onClick={() => answerQuestion(item.direction)}>
+                {item.image && <Image className="answer-image" src={item.image} alt="" width={480} height={320} />}
                 <span className="answer-letter">{String.fromCharCode(65 + index)}</span>
                 <span>{item.label}</span><span className="answer-arrow">→</span>
               </button>
@@ -165,7 +166,8 @@ export default function Home() {
 function Result({ primaryKey, supportingKey, firstName, onRetake }: { primaryKey: DirectionKey; supportingKey: DirectionKey; firstName: string; onRetake: () => void }) {
   const primary = resultMap[primaryKey];
   const supporting = resultMap[supportingKey];
-  const experiencesUrl = process.env.NEXT_PUBLIC_EXPERIENCES_URL || "https://gajaboheme.com";
+  const [exportMessage, setExportMessage] = useState("");
+  const experiencesUrl = process.env.NEXT_PUBLIC_EXPERIENCES_URL || "https://gajaboheme.com/services";
   const directionName = primary.direction.split(" — ")[1].toUpperCase();
 
   async function shareResult() {
@@ -174,6 +176,86 @@ function Result({ primaryKey, supportingKey, firstName, onRetake }: { primaryKey
     } else {
       await navigator.clipboard.writeText(primary.shareText);
     }
+  }
+
+  async function downloadShareImage() {
+    await document.fonts.ready;
+    const canvas = document.createElement("canvas");
+    canvas.width = 1080;
+    canvas.height = 1350;
+    const context = canvas.getContext("2d");
+    if (!context) return;
+
+    context.fillStyle = "#F3EBDD";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.strokeStyle = "#672F3C";
+    context.lineWidth = 3;
+    context.beginPath();
+    context.arc(540, 315, 165, 0, Math.PI * 2);
+    context.stroke();
+    context.beginPath();
+    context.arc(540, 315, 122, 0, Math.PI * 2);
+    context.strokeStyle = "#DCCDBB";
+    context.stroke();
+    context.fillStyle = "#B8654A";
+    context.beginPath();
+    context.arc(540, 315, 18, 0, Math.PI * 2);
+    context.fill();
+
+    context.textAlign = "center";
+    context.fillStyle = "#672F3C";
+    context.font = "600 24px Montserrat, sans-serif";
+    context.fillText("MY VORTEX DIRECTION", 540, 555);
+    context.fillStyle = "#263A35";
+    context.font = "500 86px 'Cormorant Garamond', Georgia, serif";
+    context.fillText(primary.direction, 540, 650);
+    context.fillStyle = "#672F3C";
+    context.font = "600 24px Montserrat, sans-serif";
+    context.fillText("MY CURRENT ARCHETYPE", 540, 735);
+    context.fillStyle = "#302925";
+    context.font = "500 55px 'Cormorant Garamond', Georgia, serif";
+    context.fillText(primary.archetype, 540, 815);
+
+    const shareLine = primary.shareText.split("\n")[2];
+    context.font = "italic 40px 'Cormorant Garamond', Georgia, serif";
+    context.fillStyle = "#302925";
+    const words = shareLine.split(" ");
+    const lines: string[] = [];
+    let line = "";
+    for (const word of words) {
+      const candidate = line ? `${line} ${word}` : word;
+      if (context.measureText(candidate).width > 820 && line) {
+        lines.push(line);
+        line = word;
+      } else line = candidate;
+    }
+    if (line) lines.push(line);
+    lines.forEach((text, index) => context.fillText(text, 540, 940 + index * 54));
+
+    context.strokeStyle = "#DCCDBB";
+    context.beginPath();
+    context.moveTo(210, 1135);
+    context.lineTo(870, 1135);
+    context.stroke();
+    context.fillStyle = "#672F3C";
+    context.font = "600 25px Montserrat, sans-serif";
+    context.fillText("GAJA BOHÈME · THE VORTEX COMPASS", 540, 1210);
+    context.fillStyle = "#73745A";
+    context.font = "400 22px Montserrat, sans-serif";
+    context.fillText("gajaboheme.com", 540, 1260);
+
+    canvas.toBlob((blob) => {
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `vortex-compass-${primaryKey}.png`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setExportMessage("Your social image has been downloaded.");
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }, "image/png");
   }
 
   return (
@@ -221,8 +303,11 @@ function Result({ primaryKey, supportingKey, firstName, onRetake }: { primaryKey
         ) : null}
         <div className="result-actions">
           <button className="text-button" onClick={shareResult}>Share My Result</button>
+          <button className="text-button" onClick={downloadShareImage}>Download Social Image</button>
+          <button className="text-button" onClick={() => window.print()}>Save Result as PDF</button>
           <button className="text-button" onClick={onRetake}>Retake the Compass</button>
         </div>
+        {exportMessage && <p className="export-message" role="status">{exportMessage}</p>}
       </section>
 
       <section className="supporting content-width">

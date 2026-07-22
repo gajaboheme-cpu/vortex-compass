@@ -14,7 +14,6 @@ export type ResultContent = {
   reflection: string;
   supporting: string;
   shareText: string;
-  image: string;
   pdf: string;
   guideAvailable: boolean;
 };
@@ -33,7 +32,6 @@ export const resultMap: Record<DirectionKey, ResultContent> = {
     reflection: "What would become possible if replenishment were part of the path rather than a reward at the end?",
     supporting: "Protecting your energy will help support your next step. Nourish reminds you that sustainable change begins with enough inner resource to meet it.",
     shareText: "South — Nourish\nThe Alchemist of Restoration\nMy current season is asking me to transform depletion into restoration.",
-    image: "/images/results/nourish.jpg",
     pdf: "/guides/vortex-nourish-guide.pdf",
     guideAvailable: false,
   },
@@ -50,7 +48,6 @@ export const resultMap: Record<DirectionKey, ResultContent> = {
     reflection: "What are you ready to stop carrying, even if you once carried it with love?",
     supporting: "Making space will help support your next step. Release helps you separate what is complete from what still deserves your energy.",
     shareText: "West — Release\nThe Alchemist of Liberation\nMy current season is asking me to transform heaviness into freedom.",
-    image: "/images/results/release.jpg",
     pdf: "/guides/vortex-release-guide.pdf",
     guideAvailable: false,
   },
@@ -67,7 +64,6 @@ export const resultMap: Record<DirectionKey, ResultContent> = {
     reflection: "What wants to be expressed through you before you feel completely ready?",
     supporting: "Allowing yourself to be seen will help support your next step. Shine invites your changing inner truth to become visible in the life you are creating.",
     shareText: "East — Shine\nThe Alchemist of Illumination\nMy current season is asking me to transform hidden expression into visible light.",
-    image: "/images/results/shine.jpg",
     pdf: "/guides/vortex-shine-guide.pdf",
     guideAvailable: false,
   },
@@ -84,7 +80,6 @@ export const resultMap: Record<DirectionKey, ResultContent> = {
     reflection: "Where are you being invited to let yourself be known rather than merely useful?",
     supporting: "Letting yourself receive support will help support your next step. Connect reminds you that transformation does not have to happen in isolation.",
     shareText: "North — Connect\nThe Alchemist of Belonging\nMy current season is asking me to transform isolation into meaningful support.",
-    image: "/images/results/connect.jpg",
     pdf: "/guides/vortex-connect-guide.pdf",
     guideAvailable: false,
   },
@@ -101,16 +96,16 @@ export const resultMap: Record<DirectionKey, ResultContent> = {
     reflection: "Who are you becoming when you stop asking the past to predict what comes next?",
     supporting: "Remaining open to new possibilities will help support your next step. Expand offers permission to meet change with curiosity rather than immediate certainty.",
     shareText: "Center — Expand\nThe Alchemist of Becoming\nMy current season is asking me to transform uncertainty into possibility.",
-    image: "/images/results/expand.jpg",
     pdf: "/guides/vortex-expand-guide.pdf",
     guideAvailable: false,
   },
 };
 
-type Option = { label: string; direction: DirectionKey };
+type Option = { label: string; direction: DirectionKey; image?: string };
 export type Question = { prompt: string; options: Option[] };
 
 const option = (label: string, direction: DirectionKey): Option => ({ label, direction });
+const imageOption = (label: string, direction: DirectionKey, image: string): Option => ({ label, direction, image });
 
 export const questions: Question[] = [
   { prompt: "What are you craving most right now?", options: [option("Deep rest and replenishment", "nourish"), option("Room to breathe and let go", "release"), option("Permission to be fully seen", "shine"), option("Genuine companionship", "connect"), option("A doorway into something new", "expand")] },
@@ -121,7 +116,7 @@ export const questions: Question[] = [
   { prompt: "If you could choose one medicine for this moment, what would it be?", options: [option("Warmth", "nourish"), option("A clean ending", "release"), option("Courage", "shine"), option("Community", "connect"), option("Wonder", "expand")] },
   { prompt: "What kind of movement feels most honest?", options: [option("Turning inward", "nourish"), option("Exhaling and unclenching", "release"), option("Stepping forward", "shine"), option("Reaching out", "connect"), option("Opening wider", "expand")] },
   { prompt: "What do you want to trust more deeply?", options: [option("My body’s timing", "nourish"), option("The wisdom of endings", "release"), option("My own voice", "shine"), option("The support around me", "connect"), option("The unknown", "expand")] },
-  { prompt: "Without overthinking, choose the image that calls to you.", options: [option("A sheltered garden", "nourish"), option("Leaves carried downstream", "release"), option("Sunrise over open land", "shine"), option("Hands woven together", "connect"), option("A spiral at the center", "expand")] },
+  { prompt: "Without overthinking, choose the image that calls to you.", options: [imageOption("A sheltered garden", "nourish", "/images/results/nourish.jpg"), imageOption("Leaves carried downstream", "release", "/images/results/release.jpg"), imageOption("Sunrise over open land", "shine", "/images/results/shine.jpg"), imageOption("Hands woven together", "connect", "/images/results/connect.jpg"), imageOption("A spiral at the center", "expand", "/images/results/expand.jpg")] },
 ];
 
 export function calculateResult(answers: DirectionKey[]) {

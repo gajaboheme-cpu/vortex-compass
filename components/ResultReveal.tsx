@@ -14,7 +14,6 @@ export default function ResultReveal({ resultKey, result, firstName }: ResultRev
   const [initialized, setInitialized] = useState(false);
   const [animate, setAnimate] = useState(false);
   const [complete, setComplete] = useState(false);
-  const [imageFailed, setImageFailed] = useState(false);
 
   useEffect(() => {
     const initialize = window.setTimeout(() => {
@@ -62,13 +61,6 @@ export default function ResultReveal({ resultKey, result, firstName }: ResultRev
         </div>
         {animate && !complete && <button className="skip-animation" onClick={skipAnimation}>Skip Animation</button>}
       </section>
-      {!imageFailed && (
-        <figure className="result-image">
-          {/* Files are supplied as static editorial assets; a missing development asset hides safely. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={result.image} alt={`${result.direction} — ${result.archetype}`} onError={() => setImageFailed(true)} />
-        </figure>
-      )}
     </>
   );
 }
