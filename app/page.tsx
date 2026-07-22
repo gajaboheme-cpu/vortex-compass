@@ -132,10 +132,23 @@ export default function Home() {
           <h2>{questions[questionIndex].prompt}</h2>
           <div className={`answers ${questions[questionIndex].options.some((item) => item.image) ? "visual-answers" : ""}`}>
             {questions[questionIndex].options.map((item, index) => (
-              <button key={item.direction} className={`answer ${item.image ? "image-answer" : ""}`} onClick={() => answerQuestion(item.direction)}>
-                {item.image && <Image className="answer-image" src={item.image} alt="" width={480} height={320} />}
-                <span className="answer-letter">{String.fromCharCode(65 + index)}</span>
-                <span>{item.label}</span><span className="answer-arrow">→</span>
+              <button
+                key={item.direction}
+                className={`answer ${item.image ? "image-answer" : ""}`}
+                aria-label={item.image ? `Choose image ${String.fromCharCode(65 + index)}` : undefined}
+                onClick={() => answerQuestion(item.direction)}
+              >
+                {item.image ? (
+                  <>
+                    <Image className="answer-image" src={item.image} alt="" width={480} height={320} />
+                    <span className="image-letter" aria-hidden="true">{String.fromCharCode(65 + index)}</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="answer-letter">{String.fromCharCode(65 + index)}</span>
+                    <span>{item.label}</span><span className="answer-arrow">→</span>
+                  </>
+                )}
               </button>
             ))}
           </div>
