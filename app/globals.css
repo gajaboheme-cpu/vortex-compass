@@ -12,7 +12,17 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .nav-mark { color: var(--rust); font-size: 22px; }
 .screen { min-height: calc(100vh - 78px); padding: 70px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 .hero { overflow: hidden; position: relative; background: radial-gradient(circle at 50% 38%, rgba(200,164,102,.12), transparent 27%), var(--paper); }
-.orb { width: 138px; height: 138px; margin-bottom: 34px; border: 1px solid var(--gold); border-radius: 50%; display: grid; place-items: center; box-shadow: 0 0 0 18px rgba(200,164,102,.08), 0 0 0 36px rgba(200,164,102,.035); color: var(--rust); font-size: 36px; }
+.hero-compass { width: 184px; height: 184px; margin-bottom: 30px; color: var(--wine); filter: drop-shadow(0 12px 20px rgba(103,47,60,.08)); }
+.hero-compass svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.hero-compass-outer { fill: rgba(243,235,221,.6); stroke: var(--wine); stroke-width: 1.5; }
+.hero-compass-ring { fill: none; stroke: var(--sand); stroke-width: 1; stroke-dasharray: 2 5; }
+.hero-compass-cross { fill: none; stroke: var(--sand); stroke-width: .8; }
+.hero-compass text { fill: var(--wine); font: 600 8px Montserrat, sans-serif; text-anchor: middle; letter-spacing: .12em; }
+.hero-compass-needle { transform: rotate(32deg); transform-origin: 110px 110px; }
+.hero-compass-needle path:first-child { fill: var(--terracotta); }
+.hero-needle-tail { fill: var(--olive); }
+.hero-compass-center { fill: var(--bone); stroke: var(--wine); stroke-width: 1.5; }
+.hero-compass-pin { fill: var(--cocoa); }
 .eyebrow { color: var(--rust); font-size: 11px; font-weight: 600; letter-spacing: .24em; line-height: 1.5; }
 h1, h2 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 400; margin: 14px 0 20px; line-height: .98; }
 h1 { font-size: clamp(54px, 7vw, 96px); }
@@ -153,7 +163,7 @@ input:focus { border-color: var(--rust); }
   .nav { height: 66px; }
   .brand-link { height: 54px; width: 86px; }
   .screen { min-height: calc(100vh - 66px); padding: 48px 20px; }
-  .orb { width: 108px; height: 108px; }
+  .hero-compass { width: 148px; height: 148px; }
   h1 { font-size: 50px; }
   h2 { font-size: 42px; }
   .quiz { justify-content: flex-start; }

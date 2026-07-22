@@ -115,7 +115,23 @@ export default function Home() {
 
       {step === "landing" && (
         <section className="hero screen">
-          <div className="orb" aria-hidden="true"><span>✦</span></div>
+          <div className="hero-compass" role="img" aria-label="A decorative Vortex Compass">
+            <svg viewBox="0 0 220 220" aria-hidden="true">
+              <circle className="hero-compass-outer" cx="110" cy="110" r="94" />
+              <circle className="hero-compass-ring" cx="110" cy="110" r="75" />
+              <path className="hero-compass-cross" d="M110 25v170M25 110h170" />
+              <text x="110" y="45">N</text>
+              <text x="178" y="115">E</text>
+              <text x="110" y="183">S</text>
+              <text x="42" y="115">W</text>
+              <g className="hero-compass-needle">
+                <path d="M110 48l10 62h-20z" />
+                <path className="hero-needle-tail" d="M110 172l-8-62h16z" />
+              </g>
+              <circle className="hero-compass-center" cx="110" cy="110" r="11" />
+              <circle className="hero-compass-pin" cx="110" cy="110" r="4" />
+            </svg>
+          </div>
           <p className="eyebrow">THE VORTEX COMPASS</p>
           <h1>What Is This Season<br />Asking of You?</h1>
           <p className="lede">A gentle nine-question reflection to reveal the direction calling for your attention right now.</p>
