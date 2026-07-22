@@ -1,4 +1,4 @@
-Add the five direction-specific editorial images here:
+The five direction-specific editorial images are stored here:
 
 - nourish.jpg
 - release.jpg
@@ -6,4 +6,4 @@ Add the five direction-specific editorial images here:
 - connect.jpg
 - expand.jpg
 
-The result page hides this image region safely when a file has not yet been supplied.
+The result page maps these files directly from each result key. If an asset is ever removed during development, the image region hides safely.

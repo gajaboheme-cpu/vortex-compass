@@ -24,7 +24,7 @@ Webhook submissions include both `primaryArchetype` and `supportingArchetype`. A
 
 Add the five final PDFs to `public/guides/`, then set each corresponding `guideAvailable` field in `app/quiz-data.ts` to `true`. Until then, production hides the download button and development shows a safe placeholder.
 
-Direction-specific editorial images use `public/images/results/{nourish,release,shine,connect,expand}.jpg`. Missing development images hide safely without interrupting the result reading.
+Direction-specific editorial images are stored at `public/images/results/{nourish,release,shine,connect,expand}.jpg`. Missing development images hide safely without interrupting the result reading.
 
 ## Deploy
 
