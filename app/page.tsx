@@ -197,7 +197,6 @@ function Result({ primaryKey, supportingKey, firstName, onRetake }: { primaryKey
   const supporting = resultMap[supportingKey];
   const [exportMessage, setExportMessage] = useState("");
   const experiencesUrl = process.env.NEXT_PUBLIC_EXPERIENCES_URL || "https://gajaboheme.com/services";
-  const directionName = primary.direction.split(" — ")[1].toUpperCase();
 
   async function shareResult() {
     if (navigator.share) {
@@ -293,34 +292,34 @@ function Result({ primaryKey, supportingKey, firstName, onRetake }: { primaryKey
 
       <section id="full-reading" className="result-details content-width">
         <article className="editorial-section editorial-opening">
-          <p className="eyebrow">WHY YOUR COMPASS MAY BE POINTING {directionName}</p>
+          <p className="eyebrow">WHY YOU MAY HAVE RECEIVED THIS RESULT</p>
           <p>{primary.why}</p>
         </article>
         <article className="editorial-section">
-          <p className="eyebrow">HOW THIS MAY BE SHOWING UP</p>
+          <p className="eyebrow">YOU MAY NOTICE</p>
           <ol>{primary.signs.map((sign) => <li key={sign}>{sign}</li>)}</ol>
         </article>
         <article className="editorial-section practice">
-          <p className="eyebrow">THE GIFT OF THE ALCHEMIST</p>
+          <p className="eyebrow">YOUR STRENGTHS</p>
           <p>{primary.gift}</p>
         </article>
         <article className="editorial-section">
-          <p className="eyebrow">WHEN THIS ALCHEMY BECOMES OVEREXTENDED</p>
+          <p className="eyebrow">WHAT CAN GET IN THE WAY</p>
           <p>{primary.overextended}</p>
         </article>
         <article className="editorial-section">
-          <p className="eyebrow">WHAT YOU ARE BEING INVITED TO TRANSFORM</p>
+          <p className="eyebrow">WHAT THIS SEASON MAY BE ASKING OF YOU</p>
           <p>{primary.invitation}</p>
         </article>
         <article className="editorial-section practices-list">
-          <p className="eyebrow">THREE PRACTICES FOR THIS SEASON</p>
+          <p className="eyebrow">TRY THIS THIS WEEK</p>
           <ol>{primary.practices.map((practice) => <li key={practice}>{practice}</li>)}</ol>
         </article>
         <blockquote className="reflection">
-          <p className="eyebrow">A REFLECTION TO CARRY WITH YOU</p>
+          <p className="eyebrow">A QUESTION TO REFLECT ON</p>
           <p>“{primary.reflection}”</p>
         </blockquote>
-        <p className="season-note">This is not a permanent identity. Your Vortex direction reflects the kind of transformation that may be asking for your attention in this season. As your needs and life circumstances change, your Compass may point somewhere new.</p>
+        <p className="season-note">This is not a permanent identity. It reflects what may need your attention right now. As your life and needs change, your Compass may point somewhere new.</p>
         <div className="guide-heading">
           <p className="eyebrow">YOUR FULL COMPASS GUIDE</p>
           <p>Your guide for {primary.direction} and {primary.archetype} offers a deeper reading and practices for this season.</p>
@@ -340,7 +339,7 @@ function Result({ primaryKey, supportingKey, firstName, onRetake }: { primaryKey
       </section>
 
       <section className="supporting content-width">
-        <p className="eyebrow">YOUR SUPPORTING ALCHEMY</p>
+        <p className="eyebrow">YOUR SUPPORTING DIRECTION</p>
         <h2>{supporting.direction}</h2>
         <p className="supporting-archetype">{supporting.archetype}</p>
         <p>{supporting.supporting}</p>

@@ -52,6 +52,7 @@ export default function ResultReveal({ resultKey, result, firstName }: ResultRev
           <div className="compass-placeholder" aria-hidden="true" />
         )}
         <div className={`reveal-copy ${complete ? "is-visible" : ""}`} aria-live="polite">
+          <p className="result-intro">Your Vortex Compass is pointing toward…</p>
           <p className="result-label">YOUR VORTEX DIRECTION</p>
           <h1>{result.direction}</h1>
           <p className="result-label">YOUR CURRENT ARCHETYPE</p>
