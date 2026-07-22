@@ -4,10 +4,17 @@ export type DirectionKey = (typeof directions)[number];
 export type ResultContent = {
   direction: string;
   archetype: string;
-  interpretation: string;
+  currentAlchemy: string;
+  why: string;
   signs: [string, string, string];
-  practice: string;
+  gift: string;
+  overextended: string;
+  invitation: string;
+  practices: [string, string, string];
+  reflection: string;
   supporting: string;
+  shareText: string;
+  image: string;
   pdf: string;
   guideAvailable: boolean;
 };
@@ -15,51 +22,86 @@ export type ResultContent = {
 export const resultMap: Record<DirectionKey, ResultContent> = {
   nourish: {
     direction: "South — Nourish",
-    archetype: "The Tender",
-    interpretation: "Your season is asking for softness, restoration, and a return to what truly sustains you.",
+    archetype: "The Alchemist of Restoration",
+    currentAlchemy: "Your current alchemy is the transformation of depletion into replenishment, receptivity, and a more sustainable rhythm.",
+    why: "Your season may be asking you to slow the pace and return to the forms of care that make your energy renewable.",
     signs: ["Rest feels more necessary than optional", "You are craving steadier rhythms", "Your body is asking you to listen more closely"],
-    practice: "Place one hand on your heart and one on your belly. Take five unhurried breaths before choosing your next task.",
-    supporting: "Protecting your energy will help support your next step.",
+    gift: "Restoration helps you become receptive again. From a nourished place, discernment becomes clearer and giving no longer requires abandoning yourself.",
+    overextended: "Care can become withdrawal or endless preparation when rest is used to avoid the next honest step.",
+    invitation: "Transform the belief that your worth depends on constant output. Let enoughness become part of your rhythm.",
+    practices: ["Begin the day with five unhurried breaths before reaching for a screen.", "Choose one obligation to simplify, postpone, or release this week.", "Create one dependable ritual that restores your body rather than merely distracting your mind."],
+    reflection: "What would become possible if replenishment were part of the path rather than a reward at the end?",
+    supporting: "Protecting your energy will help support your next step. Nourish reminds you that sustainable change begins with enough inner resource to meet it.",
+    shareText: "South — Nourish\nThe Alchemist of Restoration\nMy current season is asking me to transform depletion into restoration.",
+    image: "/images/results/nourish.jpg",
     pdf: "/guides/vortex-nourish-guide.pdf",
     guideAvailable: false,
   },
   release: {
     direction: "West — Release",
-    archetype: "The Liberator",
-    interpretation: "Your season is asking you to loosen your grip on what is complete and make room for what comes next.",
+    archetype: "The Alchemist of Liberation",
+    currentAlchemy: "Your current alchemy is the transformation of what has become heavy into space, discernment, and freedom.",
+    why: "Your Compass may be recognizing that something once useful has become too heavy to carry into the season ahead.",
     signs: ["Old commitments feel heavier than before", "You are noticing patterns ready to end", "Space feels more appealing than certainty"],
-    practice: "Name one thing you no longer need to carry. Write it down, then tear the paper slowly and with intention.",
-    supporting: "Making space will help support your next step.",
+    gift: "Liberation restores choice. Releasing what is complete creates room for clearer boundaries, honest desire, and purposeful movement.",
+    overextended: "Release can become abruptness or detachment when making space happens before the lesson has been acknowledged.",
+    invitation: "Transform obligation into discernment. Notice what is truly yours to carry and what can be set down with care.",
+    practices: ["Write down one role or expectation that no longer fits, then name what it once protected.", "Clear one small physical space as a tangible gesture of completion.", "Practice one clean no where you would usually offer a resentful yes."],
+    reflection: "What are you ready to stop carrying, even if you once carried it with love?",
+    supporting: "Making space will help support your next step. Release helps you separate what is complete from what still deserves your energy.",
+    shareText: "West — Release\nThe Alchemist of Liberation\nMy current season is asking me to transform heaviness into freedom.",
+    image: "/images/results/release.jpg",
     pdf: "/guides/vortex-release-guide.pdf",
     guideAvailable: false,
   },
   shine: {
     direction: "East — Shine",
-    archetype: "The Luminary",
-    interpretation: "Your season is asking you to trust your expression, take up space, and let your gifts be witnessed.",
+    archetype: "The Alchemist of Illumination",
+    currentAlchemy: "Your current alchemy is the transformation of hidden gifts, restrained expression, and hesitation into visibility, confidence, and creative fire.",
+    why: "Your season may be asking you to stop editing your brightness for the comfort of being overlooked.",
     signs: ["An idea keeps asking to be shared", "You feel ready for greater visibility", "Your confidence grows when you create"],
-    practice: "Share one honest sentence, idea, or creation today without polishing away its aliveness.",
-    supporting: "Allowing yourself to be seen will help support your next step.",
+    gift: "Illumination makes your gifts available to others. Visibility rooted in truth can invite connection, contribution, and creative momentum.",
+    overextended: "Shining can become performance when recognition matters more than the integrity of what you are expressing.",
+    invitation: "Transform hesitation into honest expression. Let yourself be visible without requiring perfection first.",
+    practices: ["Share one unfinished but meaningful idea with someone you trust.", "Name one strength without minimizing it or adding a disclaimer.", "Make something for the pleasure of expression before deciding how it will be received."],
+    reflection: "What wants to be expressed through you before you feel completely ready?",
+    supporting: "Allowing yourself to be seen will help support your next step. Shine invites your changing inner truth to become visible in the life you are creating.",
+    shareText: "East — Shine\nThe Alchemist of Illumination\nMy current season is asking me to transform hidden expression into visible light.",
+    image: "/images/results/shine.jpg",
     pdf: "/guides/vortex-shine-guide.pdf",
     guideAvailable: false,
   },
   connect: {
     direction: "North — Connect",
-    archetype: "The Weaver",
-    interpretation: "Your season is asking you to reach toward belonging, reciprocity, and relationships that can hold the real you.",
+    archetype: "The Alchemist of Belonging",
+    currentAlchemy: "Your current alchemy is the transformation of isolation and over-independence into support, intimacy, and meaningful belonging.",
+    why: "Your Compass may be pointing toward the relationships and communities where you can be known, supported, and met with reciprocity.",
     signs: ["You are longing for meaningful conversation", "Doing everything alone feels less sustainable", "Collaboration is appearing at the edges"],
-    practice: "Send a simple message to someone safe: “I thought of you today. Would you like to connect?”",
-    supporting: "Letting yourself receive support will help support your next step.",
+    gift: "Belonging allows support to circulate. Meaningful connection can soften self-protection and make room for collaboration, intimacy, and mutual care.",
+    overextended: "Connection can become self-abandonment when belonging depends on hiding your needs or agreeing against your own truth.",
+    invitation: "Transform over-independence into chosen interdependence. Practice receiving without treating support as a debt.",
+    practices: ["Send one honest invitation to someone who feels safe and reciprocal.", "Ask for a specific, manageable form of support this week.", "Notice where you feel most like yourself in relationship, and spend more time there."],
+    reflection: "Where are you being invited to let yourself be known rather than merely useful?",
+    supporting: "Letting yourself receive support will help support your next step. Connect reminds you that transformation does not have to happen in isolation.",
+    shareText: "North — Connect\nThe Alchemist of Belonging\nMy current season is asking me to transform isolation into meaningful support.",
+    image: "/images/results/connect.jpg",
     pdf: "/guides/vortex-connect-guide.pdf",
     guideAvailable: false,
   },
   expand: {
     direction: "Center — Expand",
-    archetype: "The Alchemist",
-    interpretation: "Your season is asking you to stay curious at the threshold and welcome a wider version of what is possible.",
+    archetype: "The Alchemist of Becoming",
+    currentAlchemy: "Your current alchemy is the transformation of uncertainty and transition into possibility, self-trust, and a new way of becoming.",
+    why: "Your Compass may be reflecting a threshold: the familiar no longer contains everything you are becoming, even if the new form is not clear yet.",
     signs: ["Familiar paths feel too small", "New possibilities arrive in surprising forms", "You sense change before you can name it"],
-    practice: "Ask yourself, “What becomes possible if I do not need to know the whole path yet?” Write for three minutes.",
-    supporting: "Remaining open to new possibilities will help support your next step.",
+    gift: "Becoming makes room for possibility without demanding premature certainty. Curiosity can turn transition into a place of discovery and self-trust.",
+    overextended: "Expansion can become scattering when every possibility is pursued and none receives enough devotion to take root.",
+    invitation: "Transform uncertainty into experimentation. Choose the next honest step without requiring the entire path to reveal itself.",
+    practices: ["Write for three minutes on what becomes possible if you do not need the whole plan yet.", "Choose one small experiment that can teach you more than further analysis.", "Protect a pocket of unscheduled time for curiosity, play, or new input."],
+    reflection: "Who are you becoming when you stop asking the past to predict what comes next?",
+    supporting: "Remaining open to new possibilities will help support your next step. Expand offers permission to meet change with curiosity rather than immediate certainty.",
+    shareText: "Center — Expand\nThe Alchemist of Becoming\nMy current season is asking me to transform uncertainty into possibility.",
+    image: "/images/results/expand.jpg",
     pdf: "/guides/vortex-expand-guide.pdf",
     guideAvailable: false,
   },

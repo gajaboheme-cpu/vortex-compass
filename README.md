@@ -10,9 +10,21 @@ A lightweight Next.js/TypeScript quiz with no database, server API, email delive
 
 When the webhook is not configured, submissions are stored under `vortexCompassResult` in browser local storage. The result screen always continues.
 
+The five seasonal results share one unified framework:
+
+- South — Nourish | The Alchemist of Restoration
+- West — Release | The Alchemist of Liberation
+- East — Shine | The Alchemist of Illumination
+- North — Connect | The Alchemist of Belonging
+- Center — Expand | The Alchemist of Becoming
+
+Webhook submissions include both `primaryArchetype` and `supportingArchetype`. A completed result session is stored locally so refreshing shows the already-settled Compass instead of replaying its animated reveal.
+
 ## Static guides
 
 Add the five final PDFs to `public/guides/`, then set each corresponding `guideAvailable` field in `app/quiz-data.ts` to `true`. Until then, production hides the download button and development shows a safe placeholder.
+
+Direction-specific editorial images use `public/images/results/{nourish,release,shine,connect,expand}.jpg`. Missing development images hide safely without interrupting the result reading.
 
 ## Deploy
 

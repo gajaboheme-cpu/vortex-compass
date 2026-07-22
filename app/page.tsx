@@ -1,8 +1,9 @@
 "use client";
 
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { calculateResult, DirectionKey, questions, resultMap } from "./quiz-data";
+import ResultReveal from "../components/ResultReveal";
 
 type Step = "landing" | "quiz" | "capture" | "result";
 
@@ -17,6 +18,32 @@ export default function Home() {
   const submitted = useRef(false);
 
   const result = answers.length === questions.length ? calculateResult(answers) : null;
+
+  useEffect(() => {
+    const restore = window.setTimeout(() => {
+      try {
+        const saved = localStorage.getItem("vortexCompassSession");
+        if (!saved) return;
+        const session = JSON.parse(saved) as { firstName?: string; email?: string; answers?: DirectionKey[] };
+        if (session.answers?.length !== questions.length) return;
+        setFirstName(session.firstName || "");
+        setEmail(session.email || "");
+        setAnswers(session.answers);
+        setStep("result");
+      } catch {
+        localStorage.removeItem("vortexCompassSession");
+      }
+    }, 0);
+    return () => window.clearTimeout(restore);
+  }, []);
+
+  function startQuiz() {
+    localStorage.removeItem("vortexResultRevealed");
+    localStorage.removeItem("vortexCompassSession");
+    setAnswers([]);
+    setQuestionIndex(0);
+    setStep("quiz");
+  }
 
   function answerQuestion(answer: DirectionKey) {
     const next = [...answers, answer];
@@ -49,12 +76,14 @@ export default function Home() {
       primaryArchetype: primary.archetype,
       primaryResult: `${primary.direction} | ${primary.archetype}`,
       supportingDirection: supporting.direction,
+      supportingArchetype: supporting.archetype,
       quizAnswers: answers.map((answer, index) => ({ question: index + 1, answer })),
       source: "vortex-compass-quiz",
       submittedAt: new Date().toISOString(),
     };
 
     const webhookUrl = process.env.NEXT_PUBLIC_GHL_WEBHOOK_URL;
+    localStorage.setItem("vortexCompassSession", JSON.stringify({ firstName, email, answers }));
     if (webhookUrl) {
       try {
         await fetch(webhookUrl, {
@@ -90,7 +119,7 @@ export default function Home() {
           <p className="eyebrow">THE VORTEX COMPASS</p>
           <h1>What Is This Season<br />Asking of You?</h1>
           <p className="lede">A gentle nine-question reflection to reveal the direction calling for your attention right now.</p>
-          <button className="primary-button" onClick={() => setStep("quiz")}>Begin the Compass <span>→</span></button>
+          <button className="primary-button" onClick={startQuiz}>Begin the Compass <span>→</span></button>
           <p className="microcopy">Takes about 2 minutes</p>
         </section>
       )}
@@ -128,47 +157,78 @@ export default function Home() {
         </section>
       )}
 
-      {step === "result" && result && <Result primaryKey={result.primary} supportingKey={result.supporting} firstName={firstName} />}
+      {step === "result" && result && <Result primaryKey={result.primary} supportingKey={result.supporting} firstName={firstName} onRetake={startQuiz} />}
     </main>
   );
 }
 
-function Result({ primaryKey, supportingKey, firstName }: { primaryKey: DirectionKey; supportingKey: DirectionKey; firstName: string }) {
+function Result({ primaryKey, supportingKey, firstName, onRetake }: { primaryKey: DirectionKey; supportingKey: DirectionKey; firstName: string; onRetake: () => void }) {
   const primary = resultMap[primaryKey];
   const supporting = resultMap[supportingKey];
   const experiencesUrl = process.env.NEXT_PUBLIC_EXPERIENCES_URL || "https://gajaboheme.com";
+  const directionName = primary.direction.split(" — ")[1].toUpperCase();
+
+  async function shareResult() {
+    if (navigator.share) {
+      await navigator.share({ title: "My Vortex Compass", text: primary.shareText });
+    } else {
+      await navigator.clipboard.writeText(primary.shareText);
+    }
+  }
 
   return (
     <div className="result-page">
-      <section className="result-hero screen">
-        <p className="eyebrow">{firstName ? `${firstName.toUpperCase()}, YOUR` : "YOUR"} VORTEX COMPASS</p>
-        <p className="result-intro">Your Compass is pointing toward…</p>
-        <div className={`direction-symbol ${primaryKey}`} aria-hidden="true">✦</div>
-        <h1>{primary.direction}</h1>
-        <p className="archetype">{primary.archetype}</p>
-        <p className="interpretation">{primary.interpretation}</p>
-      </section>
+      <ResultReveal resultKey={primaryKey} result={primary} firstName={firstName} />
 
-      <section className="result-details content-width">
-        <div>
-          <p className="eyebrow">THREE SIGNS THIS MAY BE PRESENT</p>
+      <section id="full-reading" className="result-details content-width">
+        <article className="editorial-section editorial-opening">
+          <p className="eyebrow">WHY YOUR COMPASS MAY BE POINTING {directionName}</p>
+          <p>{primary.why}</p>
+        </article>
+        <article className="editorial-section">
+          <p className="eyebrow">HOW THIS MAY BE SHOWING UP</p>
           <ol>{primary.signs.map((sign) => <li key={sign}>{sign}</li>)}</ol>
+        </article>
+        <article className="editorial-section practice">
+          <p className="eyebrow">THE GIFT OF THE ALCHEMIST</p>
+          <p>{primary.gift}</p>
+        </article>
+        <article className="editorial-section">
+          <p className="eyebrow">WHEN THIS ALCHEMY BECOMES OVEREXTENDED</p>
+          <p>{primary.overextended}</p>
+        </article>
+        <article className="editorial-section">
+          <p className="eyebrow">WHAT YOU ARE BEING INVITED TO TRANSFORM</p>
+          <p>{primary.invitation}</p>
+        </article>
+        <article className="editorial-section practices-list">
+          <p className="eyebrow">THREE PRACTICES FOR THIS SEASON</p>
+          <ol>{primary.practices.map((practice) => <li key={practice}>{practice}</li>)}</ol>
+        </article>
+        <blockquote className="reflection">
+          <p className="eyebrow">A REFLECTION TO CARRY WITH YOU</p>
+          <p>“{primary.reflection}”</p>
+        </blockquote>
+        <p className="season-note">This is not a permanent identity. Your Vortex direction reflects the kind of transformation that may be asking for your attention in this season. As your needs and life circumstances change, your Compass may point somewhere new.</p>
+        <div className="guide-heading">
+          <p className="eyebrow">YOUR FULL COMPASS GUIDE</p>
+          <p>Your guide for {primary.direction} and {primary.archetype} offers a deeper reading and practices for this season.</p>
         </div>
-        <div className="practice">
-          <p className="eyebrow">A SIMPLE PRACTICE</p>
-          <p>{primary.practice}</p>
-        </div>
-        <p className="season-note">This is not a permanent label. It reflects what may be asking for your attention in this season.</p>
         {primary.guideAvailable ? (
           <a className="primary-button download" href={primary.pdf} download>Download My Full Compass Guide <span>↓</span></a>
         ) : process.env.NODE_ENV === "development" ? (
           <p className="guide-placeholder">Your full Compass guide will appear here when the final PDF is added.</p>
         ) : null}
+        <div className="result-actions">
+          <button className="text-button" onClick={shareResult}>Share My Result</button>
+          <button className="text-button" onClick={onRetake}>Retake the Compass</button>
+        </div>
       </section>
 
       <section className="supporting content-width">
-        <p className="eyebrow">YOUR SUPPORTING DIRECTION</p>
+        <p className="eyebrow">YOUR SUPPORTING ALCHEMY</p>
         <h2>{supporting.direction}</h2>
+        <p className="supporting-archetype">{supporting.archetype}</p>
         <p>{supporting.supporting}</p>
       </section>
 
