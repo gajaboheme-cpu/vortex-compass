@@ -196,7 +196,7 @@ function Result({ primaryKey, supportingKey, firstName, onRetake }: { primaryKey
   const primary = resultMap[primaryKey];
   const supporting = resultMap[supportingKey];
   const [exportMessage, setExportMessage] = useState("");
-  const experiencesUrl = process.env.NEXT_PUBLIC_EXPERIENCES_URL || "https://gajaboheme.com/services";
+  const experiencesUrl = process.env.NEXT_PUBLIC_EXPERIENCES_URL || "https://gajaboheme.com/experiences";
 
   async function shareResult() {
     if (navigator.share) {

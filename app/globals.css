@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@400;500;600&display=swap');
 
 :root { --ink: #263a35; --paper: #f5f0e7; --paper-deep: #ece3d5; --sage: #859789; --rust: #aa654d; --gold: #c8a466; --line: rgba(38,58,53,.18); --bone: #f3ebdd; --wine: #672f3c; --terracotta: #b8654a; --olive: #73745a; --cocoa: #302925; --sand: #dccdbb; }
 * { box-sizing: border-box; }
@@ -23,7 +23,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .hero-needle-tail { fill: var(--olive); }
 .hero-compass-center { fill: var(--bone); stroke: var(--wine); stroke-width: 1.5; }
 .hero-compass-pin { fill: var(--cocoa); }
-.eyebrow { color: var(--rust); font-size: 11px; font-weight: 600; letter-spacing: .24em; line-height: 1.5; }
+.eyebrow { color: var(--rust); font-family: "Cinzel", serif; font-size: 11px; font-weight: 600; letter-spacing: .24em; line-height: 1.5; }
 h1, h2 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 400; margin: 14px 0 20px; line-height: .98; }
 h1 { font-size: clamp(54px, 7vw, 96px); }
 h2 { font-size: clamp(42px, 5.5vw, 68px); }
@@ -129,7 +129,6 @@ input:focus { border-color: var(--rust); }
 .result-details { padding-top: 100px; }
 .editorial-section { font-family: "Cormorant Garamond", serif; font-size: 22px; line-height: 1.55; }
 .editorial-opening { grid-column: 1 / -1; max-width: 720px; margin: 0 auto 15px; text-align: center; }
-.editorial-section > .eyebrow { font-family: Montserrat, sans-serif; }
 .editorial-section ol { margin-top: 20px; }
 .practices-list { grid-column: 1 / -1; }
 .reflection { grid-column: 1 / -1; margin: 15px 0; padding: 48px clamp(28px, 7vw, 72px); border: 1px solid var(--sand); text-align: center; }
