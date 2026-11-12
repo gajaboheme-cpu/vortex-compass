@@ -234,7 +234,7 @@ export default function Home() {
 
           {step === "quiz" ? (
             <>
-              <p className="eyebrow">LISTEN FOR WHAT FEELS TRUE</p>
+              <p className="eyebrow">GO WITH YOUR FIRST ANSWER</p>
               <h2>{questions[questionIndex].prompt}</h2>
               <div className={`answers ${isVisual ? "visual-answers" : ""}`}>
                 {questions[questionIndex].options.map((item, index) => (
@@ -261,7 +261,7 @@ export default function Home() {
             </>
           ) : (
             <>
-              <p className="eyebrow">NOW, HOW FAR ALONG IT IS</p>
+              <p className="eyebrow">NOW, HOW FAR ALONG YOU ARE</p>
               <h2>{stageQuestions[stageIndex].prompt}</h2>
               <div className="answers">
                 {stageQuestions[stageIndex].options.map((item, index) => (
@@ -452,9 +452,29 @@ function Result({ primaryKey, supportingKey, stageKey, personalLine, firstName, 
     <div className="result-page">
       <ResultReveal resultKey={primaryKey} result={primary} stage={stage} firstName={firstName} />
 
-      <section id="full-reading" className="reading content-width" style={{ ["--stage" as string]: stage.color }}>
-        <Image className="reading-plate" src={primary.plate} alt={`Engraving for ${primary.archetype}`} width={240} height={240} />
+      <section id="meet-alchemist" className="meet content-width">
+        <p className="eyebrow">MEET YOUR ALCHEMIST</p>
+        <Image className="meet-plate" src={primary.plate} alt={`Engraving for ${primary.archetype}`} width={240} height={240} />
+        <ul className="meet-facts">
+          <li><span>Direction</span>{primary.direction.split(" · ")[0]}</li>
+          <li><span>Element</span>{primary.element}</li>
+          <li><span>Its work</span>{primary.verb}</li>
+        </ul>
+        <p className="meet-teaching">{primary.teaching}</p>
+        <div className="meet-columns">
+          <div>
+            <p className="eyebrow">WHEN IT&apos;S OUT OF BALANCE</p>
+            <p>{primary.outOfBalance}</p>
+          </div>
+          <div>
+            <p className="eyebrow">ITS MEDICINE</p>
+            <p>{primary.medicine}</p>
+          </div>
+        </div>
+      </section>
 
+      <section id="full-reading" className="reading content-width" style={{ ["--stage" as string]: stage.color }}>
+        <p className="eyebrow reading-eyebrow">YOUR READING</p>
         <div className="reading-opening">
           <p className="opening-line">{reading.opening[0]}</p>
           <p>{reading.opening[1]}</p>
@@ -463,7 +483,7 @@ function Result({ primaryKey, supportingKey, stageKey, personalLine, firstName, 
 
         <ReadingStep label="Here's where you are" text={reading.whereYouAre} />
         <ReadingStep label="Here's what's really happening" text={reading.happening} />
-        <ReadingStep label="Meet your Alchemist" text={reading.alchemist} />
+        <ReadingStep label="What it's teaching you now" text={reading.alchemist} />
         <ReadingStep label="Your next step" text={reading.nextStep} highlight />
         <ReadingStep label="Where this is going" text={reading.goingTo} />
 

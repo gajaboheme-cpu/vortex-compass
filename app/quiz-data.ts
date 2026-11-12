@@ -12,6 +12,10 @@ export type DirectionContent = {
   element: string;
   plate: string;
   primaryQuestion: string;
+  verb: string;
+  teaching: string;
+  outOfBalance: string;
+  medicine: string;
   supporting: string;
   pdf: string;
   guideAvailable: boolean;
@@ -24,6 +28,10 @@ export const resultMap: Record<DirectionKey, DirectionContent> = {
     element: "Water",
     plate: "/images/plates/nourish.webp",
     primaryQuestion: "What am I actually hungry for?",
+    verb: "Receive",
+    teaching: "The part of you that knows how to refill. It teaches that rest is how you rebuild, not a prize you have to earn.",
+    outOfBalance: "Over-giving, pushing through, or numbing out with quick comforts.",
+    medicine: "Rest, real food, water, touch, and letting others help.",
     supporting: "Underneath it all, your body is asking for more care. Nourish reminds you that you're allowed to receive.",
     pdf: "/guides/vortex-nourish-guide.pdf",
     guideAvailable: false,
@@ -34,6 +42,10 @@ export const resultMap: Record<DirectionKey, DirectionContent> = {
     element: "Earth",
     plate: "/images/plates/release.webp",
     primaryQuestion: "What am I carrying that has already finished its work?",
+    verb: "Let go",
+    teaching: "The part of you that knows when something is finished. It teaches that endings aren\u2019t failures. What composts, becomes.",
+    outOfBalance: "Holding on too long, or cutting things off fast to skip the grief.",
+    medicine: "Grief, boundaries, ritual, and honest endings.",
     supporting: "Something you're carrying may be ready to set down. Release reminds you that letting go can be gentle and slow.",
     pdf: "/guides/vortex-release-guide.pdf",
     guideAvailable: false,
@@ -44,6 +56,10 @@ export const resultMap: Record<DirectionKey, DirectionContent> = {
     element: "Fire",
     plate: "/images/plates/shine.webp",
     primaryQuestion: "What wants to be expressed through me?",
+    verb: "Express",
+    teaching: "The part of you that wants to be seen. It teaches that your light doesn\u2019t need permission.",
+    outOfBalance: "Hiding and shrinking, or performing until you burn out.",
+    medicine: "Creativity, play, truth, movement, and sharing before it\u2019s perfect.",
     supporting: "Something in you wants to be seen. Shine reminds you that your light doesn't need permission.",
     pdf: "/guides/vortex-shine-guide.pdf",
     guideAvailable: false,
@@ -54,6 +70,10 @@ export const resultMap: Record<DirectionKey, DirectionContent> = {
     element: "Air",
     plate: "/images/plates/connect.webp",
     primaryQuestion: "Where do I belong without having to abandon myself?",
+    verb: "Belong",
+    teaching: "The part of you that knows you were never meant to do life alone. It teaches that belonging should never cost you yourself.",
+    outOfBalance: "Doing everything alone, or losing yourself to keep the peace.",
+    medicine: "Asking for help, honest talks, shared meals, breath, and your roots.",
     supporting: "You don't have to do this part alone. Connect reminds you that you're allowed to be held.",
     pdf: "/guides/vortex-connect-guide.pdf",
     guideAvailable: false,
@@ -64,6 +84,10 @@ export const resultMap: Record<DirectionKey, DirectionContent> = {
     element: "Ether",
     plate: "/images/plates/expand.webp",
     primaryQuestion: "What am I being asked to remember?",
+    verb: "Become",
+    teaching: "The part of you that holds all the others. It teaches you to come back to yourself, not backwards.",
+    outOfBalance: "Forcing clarity, chasing the next version of you, or clinging to the old one.",
+    medicine: "Stillness, curiosity, small experiments, and patience.",
     supporting: "You're also in the middle of becoming someone new. Expand reminds you to come back to yourself, not backwards.",
     pdf: "/guides/vortex-expand-guide.pdf",
     guideAvailable: false,
@@ -295,15 +319,15 @@ const option = (label: string, direction: DirectionKey): Option => ({ label, dir
 const plateOption = (label: string, direction: DirectionKey): Option => ({ label, direction, image: resultMap[direction].plate });
 
 export const questions: Question[] = [
-  { prompt: "What are you craving most right now?", options: [option("Deep rest and replenishment", "nourish"), option("Room to breathe and let go", "release"), option("Permission to be fully seen", "shine"), option("Genuine companionship", "connect"), option("A doorway into something new", "expand")] },
-  { prompt: "Which feeling has been visiting you most often?", options: [option("Tenderness", "nourish"), option("Completion", "release"), option("Creative fire", "shine"), option("Longing for belonging", "connect"), option("Restless possibility", "expand")] },
-  { prompt: "Where does your attention naturally go?", options: [option("Toward my body and its needs", "nourish"), option("Toward what I am ready to clear", "release"), option("Toward what I want to express", "shine"), option("Toward the people I care about", "connect"), option("Toward the horizon", "expand")] },
-  { prompt: "What would feel like relief?", options: [option("A slower, gentler rhythm", "nourish"), option("Closing an unfinished chapter", "release"), option("Speaking without shrinking", "shine"), option("Being held and understood", "connect"), option("Having space to experiment", "expand")] },
-  { prompt: "Which inner voice is getting louder?", options: [option("Care for yourself", "nourish"), option("You can put this down", "release"), option("Let them see you", "shine"), option("You do not have to do this alone", "connect"), option("There is more for you", "expand")] },
-  { prompt: "If you could choose one medicine for this moment, what would it be?", options: [option("Warmth", "nourish"), option("A clean ending", "release"), option("Courage", "shine"), option("Community", "connect"), option("Wonder", "expand")] },
-  { prompt: "What kind of movement feels most honest?", options: [option("Turning inward", "nourish"), option("Exhaling and unclenching", "release"), option("Stepping forward", "shine"), option("Reaching out", "connect"), option("Opening wider", "expand")] },
-  { prompt: "What do you want to trust more deeply?", options: [option("My body’s timing", "nourish"), option("The wisdom of endings", "release"), option("My own voice", "shine"), option("The support around me", "connect"), option("The unknown", "expand")] },
-  { prompt: "Without overthinking, choose the image that calls to you.", options: [plateOption("A crescent moon with drops of water", "nourish"), plateOption("A toad among roots and crystals", "release"), plateOption("A phoenix rising from flame", "shine"), plateOption("Winged Mercury", "connect"), plateOption("A serpent circling the sun and moon", "expand")] },
+  { prompt: "What do you need most right now?", options: [option("Rest and time to recharge", "nourish"), option("To let something go", "release"), option("To be seen and heard", "shine"), option("More support and connection", "connect"), option("A fresh start", "expand")] },
+  { prompt: "Which feeling shows up most for you lately?", options: [option("Tired, even after I rest", "nourish"), option("Heavy, like I'm carrying too much", "release"), option("Held back", "shine"), option("Lonely", "connect"), option("Unsure of who I'm becoming", "expand")] },
+  { prompt: "What's on your mind the most?", options: [option("My energy and my body", "nourish"), option("Something that's ending, or needs to", "release"), option("An idea or project I want to share", "shine"), option("My relationships", "connect"), option("What's next for me", "expand")] },
+  { prompt: "What would help you most this month?", options: [option("Slower days and more sleep", "nourish"), option("Closing a chapter", "release"), option("Speaking up for myself", "shine"), option("Asking for help and getting it", "connect"), option("Trying something new", "expand")] },
+  { prompt: "Which sounds most like you right now?", options: [option("\u201CI'm running on empty.\u201D", "nourish"), option("\u201CI'm holding on to too much.\u201D", "release"), option("\u201CI'm not saying what I really think.\u201D", "shine"), option("\u201CI'm doing everything on my own.\u201D", "connect"), option("\u201CI've outgrown my old life.\u201D", "expand")] },
+  { prompt: "When you're stressed, what do you usually do?", options: [option("Keep going until I crash", "nourish"), option("Hold on tighter", "release"), option("Go quiet and shrink", "shine"), option("Take care of everyone else", "connect"), option("Overthink what's next", "expand")] },
+  { prompt: "What's the hardest thing for you right now?", options: [option("Resting without feeling guilty", "nourish"), option("Letting go", "release"), option("Being visible", "shine"), option("Asking for help", "connect"), option("Not knowing what's next", "expand")] },
+  { prompt: "What do you want more of?", options: [option("Energy", "nourish"), option("Space", "release"), option("Confidence", "shine"), option("Closeness", "connect"), option("Clarity", "expand")] },
+  { prompt: "Which image are you drawn to?", options: [plateOption("A crescent moon with drops of water", "nourish"), plateOption("A toad among roots and crystals", "release"), plateOption("A phoenix rising from flame", "shine"), plateOption("Winged Mercury", "connect"), plateOption("A serpent circling the sun and moon", "expand")] },
 ];
 
 type StageOption = { label: string; stage: StageKey };
@@ -311,27 +335,27 @@ export type StageQuestion = { prompt: string; options: StageOption[] };
 
 export const stageQuestions: StageQuestion[] = [
   {
-    prompt: "Think about what's been asking for your attention. How clear does it feel?",
+    prompt: "How clear is it to you what's going on?",
     options: [
-      { label: "Foggy. I just know something's off.", stage: "nigredo" },
-      { label: "It's settling. I can name it now.", stage: "albedo" },
-      { label: "I can see the pattern clearly.", stage: "citrinitas" },
-      { label: "I'm already doing things differently.", stage: "rubedo" },
+      { label: "Not clear. Something just feels off.", stage: "nigredo" },
+      { label: "Getting clearer. I can name it.", stage: "albedo" },
+      { label: "Very clear. I see the pattern.", stage: "citrinitas" },
+      { label: "I've already started changing it.", stage: "rubedo" },
     ],
   },
   {
-    prompt: "When you think about it, how does it feel in your body?",
+    prompt: "How does it feel in your body?",
     options: [
       { label: "Heavy or tight", stage: "nigredo" },
-      { label: "Softer. Something's moving.", stage: "albedo" },
-      { label: "Lighter, more awake", stage: "citrinitas" },
-      { label: "Steady", stage: "rubedo" },
+      { label: "Starting to soften", stage: "albedo" },
+      { label: "Lighter", stage: "citrinitas" },
+      { label: "Steady and calm", stage: "rubedo" },
     ],
   },
   {
-    prompt: "What would help you most right now?",
+    prompt: "What would help most right now?",
     options: [
-      { label: "Space to not decide anything yet", stage: "nigredo" },
+      { label: "Time and space, with no decisions yet", stage: "nigredo" },
       { label: "Room to feel it", stage: "albedo" },
       { label: "A clear next step", stage: "citrinitas" },
       { label: "Support to keep going", stage: "rubedo" },
