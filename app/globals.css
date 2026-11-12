@@ -1,6 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=IM+Fell+English:ital@0;1&family=Montserrat:wght@400;500;600&display=swap');
 
-:root { --ink: #263a35; --paper: #f5f0e7; --paper-deep: #ece3d5; --sage: #859789; --rust: #aa654d; --gold: #c8a466; --line: rgba(38,58,53,.18); --bone: #f3ebdd; --wine: #672f3c; --terracotta: #b8654a; --olive: #73745a; --cocoa: #302925; --sand: #dccdbb; }
+/* Gaja Bohème palette: Oxblood #601010, Warm Ivory #F5F1EA, Charcoal Brown #3A332F, Deep Ivy #2F4A38, Antique Gold #BB9E51, Sand Beige #D9C7A1 */
+:root { --oxblood: #601010; --ivory: #F5F1EA; --charcoal: #3A332F; --ivy: #2F4A38; --gold: #BB9E51; --sand: #D9C7A1;
+  --ink: var(--charcoal); --paper: var(--ivory); --paper-deep: #EDE4D4; --sage: var(--ivy); --rust: var(--oxblood); --line: rgba(58,51,47,.18); --bone: var(--ivory); --wine: var(--oxblood); --terracotta: var(--oxblood); --olive: var(--ivy); --cocoa: var(--charcoal); }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; color: var(--ink); background: var(--paper); font-family: Montserrat, Arial, sans-serif; }
@@ -24,14 +26,15 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .hero-compass-center { fill: var(--bone); stroke: var(--wine); stroke-width: 1.5; }
 .hero-compass-pin { fill: var(--cocoa); }
 .eyebrow { color: var(--rust); font-family: "Cinzel", serif; font-size: 11px; font-weight: 600; letter-spacing: .24em; line-height: 1.5; }
-h1, h2 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 400; margin: 14px 0 20px; line-height: .98; }
+h1, h2 { font-family: "IM Fell English", Georgia, serif; font-weight: 400; color: var(--oxblood); margin: 14px 0 20px; line-height: .98; }
 h1 { font-size: clamp(54px, 7vw, 96px); }
 h2 { font-size: clamp(42px, 5.5vw, 68px); }
-.lede { max-width: 610px; font-family: "Cormorant Garamond", Georgia, serif; font-size: 22px; line-height: 1.5; color: #51615b; }
-.primary-button, .light-button { margin-top: 24px; padding: 18px 24px; border: 0; color: #fff; background: var(--ink); text-decoration: none; text-transform: uppercase; letter-spacing: .13em; font-size: 11px; font-weight: 600; cursor: pointer; display: inline-flex; justify-content: center; align-items: center; gap: 32px; transition: transform .2s, background .2s; }
-.primary-button:hover, .light-button:hover { transform: translateY(-2px); background: var(--rust); }
+.lede { max-width: 610px; font-family: "Cormorant Garamond", Georgia, serif; font-size: 22px; line-height: 1.5; color: var(--charcoal); }
+.primary-button, .light-button { margin-top: 24px; padding: 18px 24px; border: 0; color: var(--ivory); background: var(--oxblood); text-decoration: none; text-transform: uppercase; letter-spacing: .13em; font-size: 11px; font-weight: 600; cursor: pointer; display: inline-flex; justify-content: center; align-items: center; gap: 32px; transition: transform .2s, background .2s; }
+.primary-button:hover, .light-button:hover { transform: translateY(-2px); background: var(--ivy); color: var(--ivory); }
+.primary-button:disabled { transform: none; background: var(--oxblood); }
 .primary-button:disabled { opacity: .65; cursor: wait; }
-.microcopy { margin-top: 18px; color: #6d7974; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; }
+.microcopy { margin-top: 18px; color: var(--charcoal); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; }
 .quiz { max-width: 820px; margin: auto; align-items: stretch; text-align: left; }
 .quiz .eyebrow, .quiz h2 { text-align: center; }
 .quiz h2 { max-width: 720px; margin: 18px auto 42px; }
@@ -39,17 +42,17 @@ h2 { font-size: clamp(42px, 5.5vw, 68px); }
 .progress { height: 2px; background: var(--line); margin-bottom: 52px; }
 .progress span { height: 100%; background: var(--rust); display: block; transition: width .4s; }
 .answers { display: grid; gap: 10px; }
-.answer { min-height: 66px; display: grid; grid-template-columns: 42px 1fr auto; align-items: center; gap: 16px; padding: 10px 18px; background: rgba(255,255,255,.35); border: 1px solid var(--line); color: var(--ink); text-align: left; cursor: pointer; transition: background .2s, border .2s, transform .2s; }
-.answer:hover { background: #fff; border-color: var(--gold); transform: translateX(4px); }
+.answer { min-height: 66px; display: grid; grid-template-columns: 42px 1fr auto; align-items: center; gap: 16px; padding: 10px 18px; background: rgba(255,255,255,.45); font-size: 15px; border: 1px solid var(--line); color: var(--ink); text-align: left; cursor: pointer; transition: background .2s, border .2s, transform .2s; }
+.answer:hover { background: #FBF8F3; border-color: var(--gold); transform: translateX(4px); }
 .answer-letter { width: 34px; height: 34px; border: 1px solid var(--gold); border-radius: 50%; display: grid; place-items: center; color: var(--rust); font-family: "Cormorant Garamond", serif; font-size: 18px; }
 .answer-arrow { opacity: .45; }
 .quiz.visual-question { max-width: 1160px; }
 .visual-question h2 { margin-bottom: 30px; }
-.visual-answers { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.visual-answers { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 .image-answer { min-height: 0; padding: 0; display: block; position: relative; overflow: hidden; background: rgba(255,255,255,.45); }
 .image-answer:hover { transform: translateY(-4px); }
-.answer-image { display: block; width: 100%; height: 210px; object-fit: cover; }
-.image-letter { position: absolute; left: 14px; bottom: 14px; width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.8); border-radius: 50%; color: #fff; background: rgba(48,41,37,.62); font-family: "Cormorant Garamond", serif; font-size: 19px; backdrop-filter: blur(3px); }
+.answer-image { display: block; width: 100%; height: 210px; object-fit: contain; padding: 18px; background: var(--ivory); }
+.image-letter { position: absolute; left: 10px; top: 10px; width: 32px; height: 32px; display: grid; place-items: center; border: 1px solid var(--gold); border-radius: 50%; color: var(--oxblood); background: var(--ivory); font-family: "Cormorant Garamond", serif; font-size: 19px; backdrop-filter: blur(3px); }
 .back { align-self: flex-start; margin-top: 28px; border: 0; background: none; color: var(--ink); cursor: pointer; font-size: 12px; }
 .capture { background: var(--paper-deep); }
 .capture h2 { max-width: 690px; }
@@ -58,7 +61,7 @@ form { width: min(100%, 520px); margin-top: 26px; text-align: left; }
 form > label:not(.consent) { display: block; margin-bottom: 18px; font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
 input[type="text"], input[type="email"], form > label:not(.consent) input { width: 100%; margin-top: 9px; padding: 16px; border: 1px solid var(--line); outline: 0; background: rgba(255,255,255,.6); color: var(--ink); }
 input:focus { border-color: var(--rust); }
-.consent { display: flex; gap: 12px; align-items: flex-start; font-size: 11px; line-height: 1.6; color: #596762; }
+.consent { display: flex; gap: 12px; align-items: flex-start; font-size: 11px; line-height: 1.6; color: var(--charcoal); }
 .consent input { margin-top: 3px; accent-color: var(--ink); }
 .full { width: 100%; }
 .result-hero { min-height: auto; padding: 100px 24px 80px; background: var(--paper-deep); }
@@ -76,14 +79,16 @@ input:focus { border-color: var(--rust); }
 .practice > p:last-child { font-family: "Cormorant Garamond", serif; font-size: 23px; line-height: 1.45; }
 .season-note { grid-column: 1 / -1; text-align: center; font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 20px; }
 .download, .guide-placeholder { grid-column: 1 / -1; justify-self: center; text-align: center; }
-.guide-placeholder { padding: 14px 18px; border: 1px dashed var(--sage); color: #68756f; font-size: 12px; }
+.guide-placeholder { padding: 14px 18px; border: 1px dashed var(--ivy); color: var(--ivy); font-size: 12px; }
 .supporting { border-top: 1px solid var(--line); padding: 72px 0; text-align: center; }
 .supporting h2 { font-size: 46px; }
 .supporting > p:last-child { font-family: "Cormorant Garamond", serif; font-size: 22px; }
-.final-cta { padding: 100px 24px; text-align: center; color: #f8f3ea; background: var(--ink); }
-.final-cta .eyebrow { color: #d5ad70; }
-.final-cta p:not(.eyebrow) { max-width: 690px; margin: 0 auto; font-family: "Cormorant Garamond", serif; font-size: 21px; line-height: 1.55; color: #d8dfdb; }
-.light-button { background: #f2eade; color: var(--ink); }
+.final-cta { padding: 100px 24px; text-align: center; color: var(--ivory); background: var(--oxblood); }
+.final-cta .eyebrow { color: var(--gold); }
+.final-cta h2 { max-width: 820px; margin-inline: auto; color: var(--ivory); font-size: clamp(34px, 4.4vw, 52px); line-height: 1.12; }
+.final-cta p:not(.eyebrow) { max-width: 690px; margin: 0 auto; font-family: "Cormorant Garamond", serif; font-size: 21px; line-height: 1.55; color: var(--sand); }
+.light-button { background: var(--ivory); color: var(--oxblood); }
+.final-cta .light-button:hover { background: var(--gold); color: var(--charcoal); }
 
 /* Result reveal */
 .result-reveal { min-height: calc(100vh - 78px); padding-top: 54px; background: var(--bone); opacity: 0; transition: opacity .3s ease; }
@@ -95,15 +100,15 @@ input:focus { border-color: var(--rust); }
 .compass-ring { fill: none; stroke: var(--sand); stroke-width: 1; }
 .compass-ring-inner { stroke-dasharray: 2 8; }
 .compass-cross { fill: none; stroke: var(--sand); stroke-width: .8; }
-.compass-botanical { fill: none; stroke: var(--olive); stroke-width: 1.2; stroke-linecap: round; }
+.compass-botanical { fill: none; stroke: var(--gold); stroke-width: 1.2; stroke-linecap: round; }
 .compass-marker { fill: var(--wine); transition: fill .35s ease; }
 .compass-marker text { font: 600 11px Montserrat, sans-serif; text-anchor: middle; letter-spacing: .16em; }
-.compass-marker.is-selected { fill: var(--terracotta); }
+.compass-marker.is-selected { fill: var(--gold); }
 .compass-needle { transform-origin: 180px 180px; }
-.needle-result { fill: var(--terracotta); }
-.needle-tail { fill: var(--olive); }
+.needle-result { fill: var(--oxblood); }
+.needle-tail { fill: var(--gold); }
 .compass-center { fill: var(--bone); stroke: var(--wine); stroke-width: 1.5; }
-.compass-center.is-selected { fill: var(--terracotta); stroke: var(--terracotta); }
+.compass-center.is-selected { fill: var(--gold); stroke: var(--oxblood); }
 .compass-pin { fill: var(--cocoa); }
 .compass-connect { --needle-angle: 0deg; }
 .compass-shine { --needle-angle: 90deg; }
@@ -121,7 +126,7 @@ input:focus { border-color: var(--rust); }
 .reveal-copy { max-width: 820px; opacity: 0; transform: translateY(8px); pointer-events: none; transition: opacity .45s ease, transform .45s ease; }
 .reveal-copy.is-visible { opacity: 1; transform: none; pointer-events: auto; }
 .result-label { margin: 12px 0 0; color: var(--wine); font-size: 9px; font-weight: 600; letter-spacing: .22em; }
-.reveal-copy h1 { margin: 8px 0 26px; font-size: clamp(52px, 7vw, 86px); }
+.reveal-copy h1 { margin: 8px 0 14px; font-size: clamp(42px, 6vw, 76px); }
 .reveal-archetype { margin: 8px 0 20px; font-family: "Cormorant Garamond", serif; font-size: clamp(30px, 4vw, 46px); line-height: 1.1; }
 .current-alchemy { max-width: 700px; margin: 0 auto; font-family: "Cormorant Garamond", serif; font-size: 23px; line-height: 1.45; }
 .skip-animation { margin-top: 14px; padding: 8px; border: 0; border-bottom: 1px solid var(--wine); background: transparent; color: var(--wine); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; }
@@ -138,6 +143,64 @@ input:focus { border-color: var(--rust); }
 .export-message { grid-column: 1 / -1; margin: -26px 0 0; text-align: center; color: var(--olive); font-size: 11px; }
 .text-button { padding: 8px 2px; border: 0; border-bottom: 1px solid var(--ink); background: transparent; color: var(--ink); font-size: 10px; letter-spacing: .13em; text-transform: uppercase; cursor: pointer; }
 .supporting-archetype { margin: -10px 0 20px !important; color: var(--rust); font-family: Montserrat, sans-serif !important; font-size: 11px !important; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
+
+/* Landing compass */
+.hero-compass { width: 210px; height: 210px; margin-bottom: 26px; filter: none; }
+.hero-compass svg { display: block; width: 100%; height: 100%; }
+.cm-line { fill: none; stroke: var(--charcoal); }
+.cm-ticks { fill: none; stroke: var(--charcoal); stroke-width: 18; stroke-dasharray: 2.4 42.6; }
+.cm-dots { fill: none; stroke: var(--charcoal); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 0 22; }
+.cm-gold { fill: none; stroke: var(--gold); stroke-width: 4; }
+.cm-spiral { fill: none; stroke: var(--gold); stroke-width: 7; stroke-linecap: round; }
+.cm-spin { transform-box: fill-box; transform-origin: center; animation: cmSpin 18s linear infinite; }
+.cm-med { fill: var(--ivory); stroke: var(--gold); stroke-width: 4; }
+.cm-sym { fill: none; stroke: var(--oxblood); stroke-width: 8; }
+.cm-star { fill: var(--charcoal); }
+@keyframes cmSpin { to { transform: rotate(360deg); } }
+
+/* Story box */
+.story { background: var(--paper-deep); }
+.story h2 { max-width: 700px; }
+.story-field { width: min(100%, 620px); margin-top: 18px; }
+.story-field textarea { width: 100%; padding: 18px; border: 1px solid var(--line); background: rgba(255,255,255,.65); color: var(--charcoal); font-family: "Cormorant Garamond", Georgia, serif; font-size: 21px; line-height: 1.5; resize: vertical; outline: 0; }
+.story-field textarea:focus { border-color: var(--oxblood); }
+.story-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.story .back { align-self: center; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Support screen */
+.support { max-width: 760px; margin: auto; }
+.support .lede { margin: 0 auto 14px; }
+.support-list { width: min(100%, 560px); margin: 18px 0 30px; padding: 0; list-style: none; text-align: left; border-top: 1px solid var(--line); }
+.support-list li { padding: 16px 4px; border-bottom: 1px solid var(--line); line-height: 1.5; }
+.support-list strong { color: var(--oxblood); }
+.support-list a { color: var(--oxblood); }
+
+/* Reveal: stage badge */
+.stage-badge { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; margin: 22px auto 6px; padding: 14px 34px; border: 1px solid var(--gold); }
+.stage-plain { font-family: "IM Fell English", Georgia, serif; font-size: 30px; line-height: 1; }
+.stage-latin { font-family: "Cinzel", serif; font-size: 11px; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; opacity: .9; }
+.reveal-copy .result-label { color: var(--ivy); }
+
+/* The reading */
+.reading { padding: 80px 0 90px; max-width: 680px; display: flex; flex-direction: column; gap: 34px; }
+.reading-plate { display: block; width: 190px; height: 190px; margin: 0 auto; object-fit: contain; }
+.reading-opening { text-align: center; font-family: "Cormorant Garamond", Georgia, serif; font-size: 23px; line-height: 1.55; }
+.reading-opening p { margin: 0 0 14px; }
+.opening-line { font-family: "IM Fell English", Georgia, serif; color: var(--oxblood); font-size: clamp(30px, 4vw, 40px); line-height: 1.2; }
+.personal-line { margin-top: 22px !important; padding: 18px 22px; border-left: 3px solid var(--gold); background: rgba(187,158,81,.1); font-style: italic; text-align: left; }
+.reading-step { padding-top: 26px; border-top: 1px solid var(--line); }
+.reading-step .eyebrow { margin: 0 0 8px; color: var(--oxblood); }
+.reading-step p:last-child { margin: 0; font-family: "Cormorant Garamond", Georgia, serif; font-size: 22px; line-height: 1.55; }
+.reading-step.is-highlight { padding: 28px 30px; border: 1px solid var(--gold); border-top-width: 4px; border-top-color: var(--stage, var(--gold)); background: var(--paper-deep); }
+.reading .reflection { margin: 6px 0 0; }
+.reading .reflection p:last-child { color: var(--oxblood); }
+.closing-line { margin: 0; text-align: center; font-family: "Cormorant Garamond", Georgia, serif; font-style: italic; font-size: 21px; line-height: 1.5; }
+.reading .download { align-self: center; }
+.reading .result-actions { flex-wrap: wrap; }
+.reading .export-message { margin: -20px 0 0; }
+.method-note { margin-top: 40px !important; font-size: 15px !important; font-style: italic; opacity: .85; }
+.supporting h2 { color: var(--oxblood); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -162,7 +225,6 @@ input:focus { border-color: var(--rust); }
   .nav { height: 66px; }
   .brand-link { height: 54px; width: 86px; }
   .screen { min-height: calc(100vh - 66px); padding: 48px 20px; }
-  .hero-compass { width: 148px; height: 148px; }
   h1 { font-size: 50px; }
   h2 { font-size: 42px; }
   .quiz { justify-content: flex-start; }
@@ -177,4 +239,11 @@ input:focus { border-color: var(--rust); }
   .animated-compass { width: min(84vw, 330px); margin-top: 10px; }
   .current-alchemy { font-size: 20px; }
   .result-actions { flex-direction: column; align-items: center; gap: 12px; }
+  .visual-answers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .visual-answers .image-answer:last-child { grid-column: 1 / -1; }
+  .answer-image { height: 170px; padding: 12px; }
+  .hero-compass { width: 170px; height: 170px; }
+  .reading { padding: 56px 0 64px; gap: 28px; }
+  .reading-step.is-highlight { padding: 22px 20px; }
+  .stage-plain { font-size: 26px; }
 }
