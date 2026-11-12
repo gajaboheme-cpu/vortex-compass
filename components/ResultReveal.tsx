@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import type { DirectionContent, DirectionKey, StageMeta } from "../app/quiz-data";
-import AnimatedCompass from "./AnimatedCompass";
+import VortexCompass from "./VortexCompass";
 
 type ResultRevealProps = {
   resultKey: DirectionKey;
@@ -40,30 +40,29 @@ export default function ResultReveal({ resultKey, result, stage, firstName }: Re
   }
 
   function continueToReading() {
-    document.getElementById("full-reading")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    document.getElementById("meet-alchemist")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   return (
-    <>
-      <section className={`result-reveal screen ${initialized ? "is-ready" : ""}`}>
-        <p className="eyebrow">{firstName ? `${firstName.toUpperCase()}, YOUR` : "YOUR"} VORTEX COMPASS</p>
-        {initialized ? (
-          <AnimatedCompass result={resultKey} animate={animate} onComplete={finishReveal} />
-        ) : (
-          <div className="compass-placeholder" aria-hidden="true" />
-        )}
-        <div className={`reveal-copy ${complete ? "is-visible" : ""}`} aria-live="polite">
-          <p className="result-intro">You&apos;re working with…</p>
-          <h1>{result.archetype}</h1>
-          <p className="result-label">{result.direction.toUpperCase()} · {result.element.toUpperCase()}</p>
-          <div className="stage-badge" style={{ background: stage.color, color: stage.ink }}>
-            <span className="stage-plain">{stage.plain}</span>
-            <span className="stage-latin">{stage.latin}</span>
-          </div>
-          <button className="primary-button" onClick={continueToReading}>Read My Reading <span>↓</span></button>
+    <section className={`result-reveal screen ${initialized ? "is-ready" : ""}`}>
+      <p className="eyebrow">{firstName ? `${firstName.toUpperCase()}, YOUR` : "YOUR"} VORTEX COMPASS</p>
+      {initialized ? (
+        <VortexCompass result={resultKey} animate={animate} onComplete={finishReveal} />
+      ) : (
+        <div className="compass-placeholder" aria-hidden="true" />
+      )}
+      <div className={`reveal-copy ${complete ? "is-visible" : ""}`} aria-live="polite">
+        <p className="result-intro">You&apos;re working with</p>
+        <h1>{result.archetype}</h1>
+        <p className="result-label">{result.direction} · {result.element}</p>
+        <div className="stage-badge" style={{ background: stage.color, color: stage.ink }}>
+          <span className="stage-caption">Your stage</span>
+          <span className="stage-plain">{stage.plain}</span>
+          <span className="stage-latin">{stage.latin}</span>
         </div>
-        {animate && !complete && <button className="skip-animation" onClick={skipAnimation}>Skip Animation</button>}
-      </section>
-    </>
+        <button className="primary-button" onClick={continueToReading}>Read My Reading <span>↓</span></button>
+      </div>
+      {animate && !complete && <button className="skip-animation" onClick={skipAnimation}>Skip animation</button>}
+    </section>
   );
 }
