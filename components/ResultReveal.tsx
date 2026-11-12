@@ -1,16 +1,17 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import type { DirectionKey, ResultContent } from "../app/quiz-data";
+import type { DirectionContent, DirectionKey, StageMeta } from "../app/quiz-data";
 import AnimatedCompass from "./AnimatedCompass";
 
 type ResultRevealProps = {
   resultKey: DirectionKey;
-  result: ResultContent;
+  result: DirectionContent;
+  stage: StageMeta;
   firstName: string;
 };
 
-export default function ResultReveal({ resultKey, result, firstName }: ResultRevealProps) {
+export default function ResultReveal({ resultKey, result, stage, firstName }: ResultRevealProps) {
   const [initialized, setInitialized] = useState(false);
   const [animate, setAnimate] = useState(false);
   const [complete, setComplete] = useState(false);
@@ -52,13 +53,14 @@ export default function ResultReveal({ resultKey, result, firstName }: ResultRev
           <div className="compass-placeholder" aria-hidden="true" />
         )}
         <div className={`reveal-copy ${complete ? "is-visible" : ""}`} aria-live="polite">
-          <p className="result-intro">Your Vortex Compass is pointing toward…</p>
-          <p className="result-label">YOUR VORTEX DIRECTION</p>
-          <h1>{result.direction}</h1>
-          <p className="result-label">YOUR CURRENT ARCHETYPE</p>
-          <p className="reveal-archetype">{result.archetype}</p>
-          <p className="current-alchemy">{result.currentAlchemy}</p>
-          <button className="primary-button" onClick={continueToReading}>Continue to My Reading <span>↓</span></button>
+          <p className="result-intro">You&apos;re working with…</p>
+          <h1>{result.archetype}</h1>
+          <p className="result-label">{result.direction.toUpperCase()} · {result.element.toUpperCase()}</p>
+          <div className="stage-badge" style={{ background: stage.color, color: stage.ink }}>
+            <span className="stage-plain">{stage.plain}</span>
+            <span className="stage-latin">{stage.latin}</span>
+          </div>
+          <button className="primary-button" onClick={continueToReading}>Read My Reading <span>↓</span></button>
         </div>
         {animate && !complete && <button className="skip-animation" onClick={skipAnimation}>Skip Animation</button>}
       </section>
